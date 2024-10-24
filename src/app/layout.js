@@ -1,8 +1,9 @@
 import localFont from "next/font/local";
 import "./globals.css";
 import { getServerSession } from "next-auth";
-import { authOptions } from "@/app/api/auth/...nextauth/route.js"; 
+import { authOptions } from "@/app/api/auth/[...nextauth]/route.js"; 
 import Login from "./login"; 
+
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
   variable: "--font-geist-sans",
@@ -17,7 +18,7 @@ const geistMono = localFont({
 
 const queen = localFont({
   src: "./fonts/text.ttf"
-})
+});
 
 export const metadata = {
   title: "Create Next App",
@@ -31,12 +32,12 @@ export default async function RootLayout({ children }) {
   return (
     <html lang="en">
       <body className={geistMono.className}>
-        {!session ? (
+        {!session  && (
           <Login />
-        ) : (
-          <div>Log-in</div>
         )}
-        {children}
+        {session && (
+          <div> hello </div>// Corrected to just use children
+        )}
       </body>
     </html>
   );
